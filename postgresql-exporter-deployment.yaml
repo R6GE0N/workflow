@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-exporter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql-exporter
+  template:
+    metadata:
+      labels:
+        app: postgresql-exporter
+    spec:
+      containers:
+      - name: postgresql-exporter
+        image: wrouesnel/postgres_exporter
+        ports:
+        - containerPort: 9187
+        env:
+        - name: DATA_SOURCE_NAME
+          value: "postgresql://myuser:mypassword@postgres:5432/sakila"

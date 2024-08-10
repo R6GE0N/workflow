@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-exporter
+  namespace: default
+spec:
+  ports:
+    - port: 9187
+      targetPort: 9187
+  selector:
+    app: postgresql-exporter
